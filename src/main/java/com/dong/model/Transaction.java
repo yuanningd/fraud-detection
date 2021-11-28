@@ -3,12 +3,13 @@ package com.dong.model;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
 @RequiredArgsConstructor
-public class Record {
+public class Transaction {
     private final String hashedCreditNumber;
     private final LocalDateTime timeStamp;
-    private final double amount;
+    private final BigDecimal amount;
 }
