@@ -18,8 +18,8 @@ public class FraudulentDetector {
 
     public List<String> getAllFraudulentHashedCreditNumbers(List<Transaction> transactions) {
         List<String> fraudulentHashedCreditNumbers = new ArrayList<>();
-        HashMap<String, Queue<Transaction>> transactionInfoMap = covertTransactionInfoIntoMap(transactions);
-        transactionInfoMap.forEach((hashedCreditNumber, transactionQueue) -> {
+        HashMap<String, Queue<Transaction>> hashedCreditNumberAndTransactionsMap = groupTransactionsByHashedCreditNumber(transactions);
+        hashedCreditNumberAndTransactionsMap.forEach((hashedCreditNumber, transactionQueue) -> {
             if(fraudulentCalculator.calculateIfFraudulent(transactionQueue)) {
                 fraudulentHashedCreditNumbers.add(hashedCreditNumber);
             };
@@ -27,14 +27,15 @@ public class FraudulentDetector {
        return fraudulentHashedCreditNumbers;
     }
 
-    private HashMap<String, Queue<Transaction>> covertTransactionInfoIntoMap(List<Transaction> transactions) {
-        HashMap<String, Queue<Transaction>> transactionInfoMap = new HashMap<>();
+    private HashMap<String, Queue<Transaction>> groupTransactionsByHashedCreditNumber(List<Transaction> transactions) {
+        HashMap<String, Queue<Transaction>> hashedCreditNumberAndTransactionsMap = new HashMap<>();
         transactions.forEach(transaction -> {
-            Queue<Transaction> transactionQueue= transactionInfoMap.getOrDefault(transaction.getHashedCreditNumber(), new ArrayDeque<>());
+            Queue<Transaction> transactionQueue= hashedCreditNumberAndTransactionsMap.getOrDefault(transaction.getHashedCreditNumber(), new ArrayDeque<>());
             transactionQueue.offer(transaction);
-            transactionInfoMap.put(transaction.getHashedCreditNumber(), transactionQueue);
+            hashedCreditNumberAndTransactionsMap.put(transaction.getHashedCreditNumber(), transactionQueue);
         });
-        return transactionInfoMap;
+        return hashedCreditNumberAndTransactionsMap;
     }
 
 }
+
