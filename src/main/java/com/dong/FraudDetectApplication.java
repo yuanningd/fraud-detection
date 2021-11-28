@@ -1,7 +1,7 @@
 package com.dong;
 
 import com.dong.model.Transaction;
-import com.dong.service.FraudulentCalculator;
+import com.dong.calculator.FraudulentCalculator;
 import com.dong.service.FraudulentDetector;
 import com.dong.service.TransactionParser;
 
