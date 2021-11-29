@@ -14,11 +14,6 @@ public class FraudulentCalculator {
 
     public boolean calculateIfFraudulent(Queue<Transaction> transactionQueue) {
         Deque<Transaction> slidingWindow = new ArrayDeque<>();
-        Transaction first = transactionQueue.poll();
-        if(first.getAmount().compareTo(threshold) > 0) {
-            return true;
-        }
-        slidingWindow.offer(first);
         while(!transactionQueue.isEmpty()){
             slidingWindow.offer(transactionQueue.poll());
             while (slidingWindow.getLast().getTimeStamp().isAfter(slidingWindow.getFirst().getTimeStamp().plusDays(1))
