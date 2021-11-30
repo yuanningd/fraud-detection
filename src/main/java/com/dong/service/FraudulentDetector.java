@@ -3,7 +3,6 @@ package com.dong.service;
 import com.dong.calculator.FraudulentCalculator;
 import com.dong.model.Transaction;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Queue;
 
-@Setter
 @RequiredArgsConstructor
 public class FraudulentDetector {
     private final FraudulentCalculator fraudulentCalculator;
