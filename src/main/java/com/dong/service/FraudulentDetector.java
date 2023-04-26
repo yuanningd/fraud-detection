@@ -8,6 +8,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 @RequiredArgsConstructor
@@ -16,19 +17,19 @@ public class FraudulentDetector {
 
     public List<String> getAllFraudulentHashedCreditNumbers(List<Transaction> transactions) {
         List<String> fraudulentHashedCreditNumbers = new ArrayList<>();
-        HashMap<String, Queue<Transaction>> hashedCreditNumberAndTransactionsMap = groupTransactionsByHashedCreditNumber(transactions);
+        Map<String, Queue<Transaction>> hashedCreditNumberAndTransactionsMap = groupTransactionsByHashedCreditNumber(transactions);
         hashedCreditNumberAndTransactionsMap.forEach((hashedCreditNumber, transactionQueue) -> {
-            if(fraudulentCalculator.calculateIfFraudulent(transactionQueue)) {
+            if (fraudulentCalculator.calculateIfFraudulent(transactionQueue)) {
                 fraudulentHashedCreditNumbers.add(hashedCreditNumber);
-            };
+            }
         });
-       return fraudulentHashedCreditNumbers;
+        return fraudulentHashedCreditNumbers;
     }
 
-    private HashMap<String, Queue<Transaction>> groupTransactionsByHashedCreditNumber(List<Transaction> transactions) {
-        HashMap<String, Queue<Transaction>> hashedCreditNumberAndTransactionsMap = new HashMap<>();
+    private Map<String, Queue<Transaction>> groupTransactionsByHashedCreditNumber(List<Transaction> transactions) {
+        Map<String, Queue<Transaction>> hashedCreditNumberAndTransactionsMap = new HashMap<>();
         transactions.forEach(transaction -> {
-            Queue<Transaction> transactionQueue= hashedCreditNumberAndTransactionsMap.getOrDefault(transaction.getHashedCreditNumber(), new ArrayDeque<>());
+            Queue<Transaction> transactionQueue = hashedCreditNumberAndTransactionsMap.getOrDefault(transaction.getHashedCreditNumber(), new ArrayDeque<>());
             transactionQueue.offer(transaction);
             hashedCreditNumberAndTransactionsMap.put(transaction.getHashedCreditNumber(), transactionQueue);
         });

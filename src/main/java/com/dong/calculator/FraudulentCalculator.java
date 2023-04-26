@@ -14,13 +14,13 @@ public class FraudulentCalculator {
 
     public boolean calculateIfFraudulent(Queue<Transaction> transactionQueue) {
         Deque<Transaction> slidingWindow = new ArrayDeque<>();
-        while(!transactionQueue.isEmpty()){
+        while (!transactionQueue.isEmpty()) {
             slidingWindow.offer(transactionQueue.poll());
             while (slidingWindow.getLast().getTimeStamp().isAfter(slidingWindow.getFirst().getTimeStamp().plusDays(1))
                     && slidingWindow.size() > 1) {
                 slidingWindow.poll();
             }
-            if(slidingWindow.stream().map(Transaction::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add).compareTo(threshold) > 0) {
+            if (slidingWindow.stream().map(Transaction::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add).compareTo(threshold) > 0) {
                 return true;
             }
         }
