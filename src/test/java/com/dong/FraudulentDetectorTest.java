@@ -3,7 +3,6 @@ package com.dong;
 import com.dong.calculator.FraudulentCalculator;
 import com.dong.model.Transaction;
 import com.dong.service.FraudulentDetector;
-
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

@@ -1,7 +1,7 @@
 package com.dong;
 
-import com.dong.model.Transaction;
 import com.dong.calculator.FraudulentCalculator;
+import com.dong.model.Transaction;
 import com.dong.service.FraudulentDetector;
 import com.dong.service.TransactionParser;
 
@@ -16,7 +16,7 @@ public class FraudDetectApplication {
         List<String> recordLines = Files.readAllLines(Path.of("record.txt"));
         List<Transaction> transactions = new TransactionParser().parse(recordLines);
 
-       FraudulentDetector fraudulentDetector = new FraudulentDetector(new FraudulentCalculator(new BigDecimal("10")));
-       fraudulentDetector.getAllFraudulentHashedCreditNumbers(transactions).forEach(System.out::println);
+        FraudulentDetector fraudulentDetector = new FraudulentDetector(new FraudulentCalculator(new BigDecimal("10")));
+        fraudulentDetector.getAllFraudulentHashedCreditNumbers(transactions).forEach(System.out::println);
     }
 }

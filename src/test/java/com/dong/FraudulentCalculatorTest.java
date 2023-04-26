@@ -5,13 +5,13 @@ import com.dong.model.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.Queue;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FraudulentCalculatorTest {
     private FraudulentCalculator fraudulentCalculator;
@@ -38,12 +38,15 @@ public class FraudulentCalculatorTest {
 
         fraudulentCalculator = new FraudulentCalculator(BigDecimal.valueOf(10));
     }
-    @Test void shouldReturnTrueGivenTestQueue1() {
+
+    @Test
+    void shouldReturnTrueGivenTestQueue1() {
         boolean ifFraudulent = fraudulentCalculator.calculateIfFraudulent(testQueue1);
         assertTrue(ifFraudulent);
     }
 
-    @Test void shouldReturnFalseGivenTestQueue2() {
+    @Test
+    void shouldReturnFalseGivenTestQueue2() {
         boolean ifFraudulent = fraudulentCalculator.calculateIfFraudulent(testQueue2);
         assertFalse(ifFraudulent);
     }
